@@ -15,7 +15,8 @@
     <ul class="list-disc ml-6">
       {% for language in languages %}
         <li>
-          <strong>{{ language.name }}</strong> - {{ language.description }}
+          <a href="{{ path('language_details', { id: language.id }) }}"><strong>{{ language.name }}</strong></a>
+          - {{ language.description }}
           {% if language.parent %}
             <br />
             <span class="text-gray-600">Langue mère : {{ language.parent.name }}</span>

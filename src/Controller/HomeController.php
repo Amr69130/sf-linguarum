@@ -19,4 +19,19 @@ final class HomeController extends AbstractController
             'languages' => $languages,
         ]);
     }
+
+
+    #[Route('/language/{id}', name: 'language_details')]
+    public function details(LanguageRepository $languageRepository, int $id): Response
+    {
+        $language = $languageRepository->find($id);
+
+        if (!$language) {
+            throw $this->createNotFoundException('Langue non trouvée.');
+        }
+
+        return $this->render('language/details.html.twig', [
+            'language' => $language,
+        ]);
+    }
 }
