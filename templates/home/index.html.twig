@@ -10,37 +10,17 @@
       <h1 class="text-4xl font-bold text-blue-600 mb-4">Bienvenue sur <span class="italic">Linguarum</span> 🌍</h1>
       <p class="text-gray-600 text-lg">Ce projet vous permet d'explorer l’arbre généalogique des langues du monde.</p>
     </div>
-    <h2 class="text-2xl font-bold mb-4">Arbre généalogique des langues</h2>
+    <h2 class="text-2xl font-bold mb-4">Langues</h2>
 
     <ul class="list-disc ml-6">
       {% for language in languages %}
-        {% if language.parent is null %}
-          {# Appel récursif pour afficher l'arbre de chaque langue mère #}
-          <ul>
-            <li>
-              <strong>{{ language.name }}</strong> : {{ language.description }}
-              {% if (language.children|length) > 0 %}
-                <ul>
-                  {% for child in language.children %}
-                    <li>
-                      <strong>{{ child.name }}</strong> : {{ child.description }}
-                      {% if (child.children|length) > 0 %}
-                        {# Appel récursif pour afficher les enfants des enfants #}
-                        <ul>
-                          {% for grandchild in child.children %}
-                            <li>
-                              <strong>{{ grandchild.name }}</strong> : {{ grandchild.description }}
-                            </li>
-                          {% endfor %}
-                        </ul>
-                      {% endif %}
-                    </li>
-                  {% endfor %}
-                </ul>
-              {% endif %}
-            </li>
-          </ul>
-        {% endif %}
+        <li>
+          <strong>{{ language.name }}</strong> - {{ language.description }}
+          {% if language.parent %}
+            <br />
+            <span class="text-gray-600">Langue mère : {{ language.parent.name }}</span>
+          {% endif %}
+        </li>
       {% endfor %}
     </ul>
   </div>
