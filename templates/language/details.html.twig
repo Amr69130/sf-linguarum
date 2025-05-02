@@ -5,12 +5,18 @@
 {% endblock %}
 
 {% block body %}
-  <div class="p-8">
-    <h1 class="text-3xl font-bold">{{ language.name }}</h1>
-    <p class="text-gray-700 mt-4">{{ language.description }}</p>
+  <div class="min-h-screen bg-gray-100 flex flex-col justify-center items-center p-8">
+    <div class="bg-white shadow-xl rounded-2xl p-10 max-w-xl w-full text-center">
+      <h1 class="text-4xl font-bold text-indigo-600 mb-4">{{ language.name }}</h1>
+      <p class="text-gray-700 text-lg mb-6">{{ language.description }}</p>
 
-    {% if language.parent %}
-      <p class="mt-2 text-sm text-gray-500">Parent : {{ language.parent.name }}</p>
-    {% endif %}
+      {% if language.parent %}
+        <p class="text-sm text-gray-500 mb-4">
+          🌱 Langue mère : <strong>{{ language.parent.name }}</strong>
+        </p>
+      {% endif %}
+
+      <a href="{{ path('app_home') }}" class="inline-block mt-6 text-indigo-500 hover:underline">← Retour à l'accueil</a>
+    </div>
   </div>
 {% endblock %}
