@@ -26,6 +26,7 @@ class Language
     private ?string $description = null;
 
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'children')]
+    #[ORM\JoinColumn(name: 'parent_id', referencedColumnName: 'id', onDelete: 'CASCADE', nullable: true)]
     private ?self $parent = null;
 
     /**
