@@ -7,7 +7,7 @@
 {% block body %}
   <div class="min-h-screen bg-cover bg-center p-10" style="background-image: url('{{ asset('images/bg2.jpg') }}');">
     <h2 class="text-3xl font-bold mb-10 text-center text-gray-900 drop-shadow">Arbre généalogique des langues</h2>
-
+    <p>Voici une liste non exhaustive de quelques familles de langues ainsi que leurs sous-familles</p>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {% for language in languages %}
         {% if language.parent is null %}
