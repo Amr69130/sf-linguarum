@@ -5,52 +5,38 @@
 {% endblock %}
 
 {% block body %}
-  <div class="min-h-screen bg-gray-100 flex flex-col justify-center items-center p-8">
-    <div class="bg-white shadow-xl rounded-2xl p-10 max-w-3xl w-full text-center mb-8">
-      <h1 class="text-4xl font-bold text-indigo-600 mb-4">Bienvenue sur <span class="italic">Linguarum</span> 🌍</h1>
-      <p class="text-gray-600 text-lg">Ce projet vous permet d'explorer l’arbre généalogique des langues du monde.</p>
-    </div>
+  <div class="min-h-screen bg-cover bg-center p-10" style="background-image: url('{{ asset('images/bg2.jpg') }}');">
+    <h2 class="text-3xl font-bold mb-10 text-center">Arbre généalogique des langues</h2>
 
-    <h2 class="text-2xl font-bold mb-6">Arbre généalogique des langues</h2>
-  </div>
-  <div class="flex flex-wrap justify-start gap-8 max-h-screen overflow-y-auto">
-    {% for language in languages %}
-      {% if language.parent is null %}
-        <div class="group relative bg-white shadow-lg rounded-2xl w-96 p-6 hover:shadow-2xl transition-transform transform hover:scale-105">
-          <div class="absolute top-0 right-0 px-2 py-1 text-xs bg-indigo-600 text-white rounded-full">Langue Mère</div>
-          <h3 class="text-xl font-bold text-indigo-600 mb-4">{{ language.name }}</h3>
-          <p class="text-gray-600 text-sm mb-4">{{ language.description }}</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      {% for language in languages %}
+        {% if language.parent is null %}
+          <div class="group relative">
+            <a href="{{ path('language_details', { id: language.id }) }}" class="block p-6 bg-white/10 backdrop-blur-md rounded-xl shadow-lg hover:shadow-2xl hover:bg-indigo-600 hover:text-white transition-all duration-300">
+              <h3 class="text-xl font-bold mb-4">{{ language.name }}</h3>
+              <p class="text-gray-200 text-sm">{{ language.description }}</p>
+            </a>
 
-          <a href="{{ path('language_details', { id: language.id }) }}" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-indigo-500 hover:underline">Voir les détails →</a>
-
-          {% if (language.children|length) > 0 %}
-            <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-300 to-indigo-600"></div>
-            <div class="mt-4">
-              <h4 class="text-lg font-semibold text-indigo-600">Langues Enfants :</h4>
-              <ul class="space-y-2 mt-2">
+            {% if (language.children|length) > 0 %}
+              <div class="ml-6 mt-4 space-y-3">
                 {% for child in language.children %}
-                  <li class="bg-indigo-50 p-3 rounded-lg shadow-md hover:shadow-xl transition-shadow transform hover:scale-105">
-                    <a href="{{ path('language_details', { id: child.id }) }}" class="block text-indigo-600"><strong>{{ child.name }}</strong> - {{ child.description }}</a>
-                  </li>
+                  <div class="pl-4">
+                    <a href="{{ path('language_details', { id: child.id }) }}" class="block p-4 bg-white/10 backdrop-blur-md rounded-xl hover:bg-indigo-500 hover:text-white transition-all">↳ {{ child.name }}</a>
 
-                  {% if (child.children|length) > 0 %}
-                    <div class="ml-8 mt-4">
-                      <h5 class="text-md font-semibold text-indigo-500">Sous-langues :</h5>
-                      <ul class="space-y-2 mt-2">
+                    {% if (child.children|length) > 0 %}
+                      <div class="ml-6 mt-2 space-y-2">
                         {% for grandchild in child.children %}
-                          <li class="bg-indigo-100 p-3 rounded-lg shadow-md hover:shadow-xl transition-shadow transform hover:scale-105">
-                            <a href="{{ path('language_details', { id: grandchild.id }) }}" class="block text-indigo-600"><strong>{{ grandchild.name }}</strong> - {{ grandchild.description }}</a>
-                          </li>
+                          <a href="{{ path('language_details', { id: grandchild.id }) }}" class="block p-3 bg-white/10 backdrop-blur-md rounded-xl hover:bg-indigo-400 hover:text-white transition-all text-sm">↳ {{ grandchild.name }}</a>
                         {% endfor %}
-                      </ul>
-                    </div>
-                  {% endif %}
+                      </div>
+                    {% endif %}
+                  </div>
                 {% endfor %}
-              </ul>
-            </div>
-          {% endif %}
-        </div>
-      {% endif %}
-    {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
   </div>
 {% endblock %}
