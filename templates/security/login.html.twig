@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Login
+{% endblock %}
+
+{% block body %}
+  <div class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm">
+      <h2 class="text-2xl font-semibold text-center mb-6">Please sign in</h2>
+
+      {% if error %}
+        <div class="text-red-500 text-sm mb-4">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+      {% endif %}
+
+      {% if app.user %}
+        <div class="mb-3 text-center">
+          You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}" class="text-blue-500 hover:underline">Logout</a>
+        </div>
+      {% endif %}
+
+      <form method="post">
+        <div class="mb-4">
+          <label for="username" class="block text-sm font-medium text-gray-700">Email</label>
+          <input type="email" id="username" name="_username" value="{{ last_username }}" class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" autocomplete="email" required autofocus />
+        </div>
+
+        <div class="mb-6">
+          <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+          <input type="password" id="password" name="_password" class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500" autocomplete="current-password" required />
+        </div>
+
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
+
+        {#
+                Uncomment this section to enable remember me functionality.
+                <div class="flex items-center mb-4">
+                    <input class="form-checkbox h-4 w-4 text-blue-500" type="checkbox" name="_remember_me" id="_remember_me">
+                    <label class="ml-2 text-sm text-gray-600" for="_remember_me">Remember me</label>
+                </div>
+                #}
+
+        <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">Sign in</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}
