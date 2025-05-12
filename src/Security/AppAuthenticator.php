@@ -47,7 +47,7 @@ class AppAuthenticator extends AbstractAuthenticator
 
         if (in_array('ROLE_ADMIN', $user->getRoles(), true)) {
             // Redirige vers la page d'administration (EasyAdmin par exemple)
-            return new RedirectResponse($this->urlGenerator->generate('admin'));
+            return new RedirectResponse($this->urlGenerator->generate('app_home'));
         }
 
         // Redirige vers la page d'accueil pour les utilisateurs réguliers

@@ -32,10 +32,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $firstname = null; // Ajout du firstname
+    private ?string $firstname = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $lastname = null; // Ajout du lastname
+    private ?string $lastname = null;
 
     public function getId(): ?int
     {

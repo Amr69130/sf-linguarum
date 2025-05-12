@@ -1,17 +1,25 @@
-<nav class="z-5 bg-gray-700">
-  <ul class="flex flex-col sm:flex-row text-white justify-center">
-    <li>
-      <a class="hover:bg-gray-900 transition-all py-4 px-5 block uppercase" href="{{ path('app_home') }}">Accueil</a>
-    </li>
+<nav class="bg-gray-700 text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <div class="flex-shrink-0">
+        {% if app.user %}
+          <span class="text-sm sm:text-base">Bienvenue {{ app.user.firstname }} {{ app.user.lastname }}</span>
+        {% endif %}
+      </div>
 
-    {% if app.user %}
-      <li>
-        <a class="hover:bg-gray-900 transition-all py-4 px-5 block uppercase" href="{{ path('app_login') }}">Logout</a>
-      </li>
-    {% else %}
-      <li>
-        <a class="hover:bg-gray-900 transition-all py-4 px-5 block uppercase" href="{{ path('app_login') }}">Login</a>
-      </li>
-    {% endif %}
-  </ul>
+      <div class="flex space-x-4">
+        <a href="{{ path('app_home') }}" class="hover:bg-gray-900 px-3 py-2 rounded-md text-sm font-medium uppercase">Accueil</a>
+
+        {% if app.user %}
+          <a href="{{ path('app_logout') }}" class="hover:bg-gray-900 px-3 py-2 rounded-md text-sm font-medium uppercase">Logout</a>
+
+          {% if 'ROLE_ADMIN' in app.user.roles %}
+            <a href="{{ path('admin') }}" class="hover:bg-gray-900 px-3 py-2 rounded-md text-sm font-medium uppercase">Admin</a>
+          {% endif %}
+        {% else %}
+          <a href="{{ path('app_login') }}" class="hover:bg-gray-900 px-3 py-2 rounded-md text-sm font-medium uppercase">Login</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
 </nav>
