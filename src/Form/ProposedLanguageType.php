@@ -26,9 +26,7 @@ class ProposedLanguageType extends AbstractType
             ])
 
 
-            ->add('save', SubmitType::class, [
-                'label' => 'Proposer la langue',
-            ]);
+
         ;
     }
 

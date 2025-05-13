@@ -1,16 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
-  Proposer une nouvelle langue
-{% endblock %}
+{% block title %}Proposer une nouvelle langue{% endblock %}
 
 {% block body %}
-  <h1>Proposer une nouvelle langue</h1>
+  <div class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-md">
+      <h1 class="text-2xl font-bold mb-6 text-center">Propose une langue ou un dialecte à ajouter !</h1>
 
-  {{ form_start(form) }}
-  {{ form_row(form.name) }}
-  {{ form_row(form.description) }}
-  {# {{ form_row(form.submittedAt) }} #}
-  {# <button class="btn btn-primary">Envoyer</button> #}
-  {{ form_end(form) }}
+      {{ form_start(form) }}
+        <div class="mb-4">
+          {{ form_label(form.name, null, {'label_attr': {'class': 'block text-gray-700 text-sm font-bold mb-2'}}) }}
+          {{ form_widget(form.name, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700'}}) }}
+          {{ form_errors(form.name) }}
+        </div>
+
+        <div class="mb-6">
+          {{ form_label(form.description, null, {'label_attr': {'class': 'block text-gray-700 text-sm font-bold mb-2'}}) }}
+          {{ form_widget(form.description, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700'}}) }}
+          {{ form_errors(form.description) }}
+        </div>
+
+        <div class="flex items-center justify-between">
+          <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Proposer
+          </button>
+        </div>
+      {{ form_end(form) }}
+    </div>
+  </div>
 {% endblock %}
