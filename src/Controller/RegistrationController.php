@@ -21,19 +21,19 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Encode the password
+
             $plainPassword = $form->get('plainPassword')->getData();
             $hashedPassword = $passwordHasher->hashPassword($user, $plainPassword);
             $user->setPassword($hashedPassword);
 
-            // Set a default role
+
             $user->setRoles(['ROLE_USER']);
 
-            // Persist to database
+
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // Optionally redirect to login or homepage
+
             return $this->redirectToRoute('app_login');
         }
 
