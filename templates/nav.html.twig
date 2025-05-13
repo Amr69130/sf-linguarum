@@ -3,12 +3,12 @@
     <div class="flex justify-between items-center h-16">
       <div class="flex-shrink-0">
         {% if app.user %}
-          <span class="text-sm sm:text-base">Bienvenue {{ app.user.firstname }} {{ app.user.lastname }}</span>
+          <span class="text-sm sm:text-base">Bienvenue {{ app.user.firstname|capitalize }} {{ app.user.lastname|upper }}</span>
         {% endif %}
       </div>
 
       <div class="flex space-x-4">
-        <a href="{{ path('app_home') }}" class="hover:bg-gray-900 px-3 py-2 rounded-md text-sm font-medium uppercase">Accueil</a>
+        <a href="{{ path('app_home') }}" class="hover:bg-gray-900 px-3 py-2 rounded-md text-sm font-medium uppercase">Home</a>
 
         {% if app.user %}
           <a href="{{ path('app_logout') }}" class="hover:bg-gray-900 px-3 py-2 rounded-md text-sm font-medium uppercase">Logout</a>
@@ -24,7 +24,7 @@
           {% endif %}
         {% else %}
           <a href="{{ path('app_login') }}" class="hover:bg-gray-900 px-3 py-2 rounded-md text-sm font-medium uppercase">Login</a>
-          <a href="{{ path('app_register') }}" class="hover:bg-gray-900 px-3 py-2 rounded-md text-sm font-medium uppercase">Register</a>
+          <a href="{{ path('app_register') }}" class="hover:bg-gray-900 px-3 py-2 rounded-md text-sm font-medium uppercase">Sign up</a>
         {% endif %}
       </div>
     </div>
