@@ -12,7 +12,7 @@
 
         {% if app.user %}
           <a href="{{ path('app_logout') }}" class="hover:bg-gray-900 px-3 py-2 rounded-md text-sm font-medium uppercase">Logout</a>
-          <a href="{{ path('proposed_language_new') }}" class="hover:bg-gray-900 px-3 py-2 rounded-md text-sm font-medium uppercase">Propose</a>
+          <a href="{{ path('proposed_language_new') }}" class="hover:bg-gray-900 px-3 py-2 rounded-md text-sm font-medium uppercase">Suggest a Language</a>
 
           {# technique (pour avoir un lien admin si l'user connecté est l'admin) qui fonctionne mais à ne pas faire : #}
           {# {% if 'ROLE_ADMIN' in app.user.roles %}
