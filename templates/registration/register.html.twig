@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+  <div class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-md">
+      <h1 class="text-2xl font-bold mb-6 text-center">Créer un compte</h1>
+
+      {{ form_start(registrationForm) }}
+        <div class="mb-4">
+          {{ form_label(registrationForm.firstname, null, {'label_attr': {'class': 'block text-gray-700 text-sm font-bold mb-2'}}) }}
+          {{ form_widget(registrationForm.firstname, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700'}}) }}
+          {{ form_errors(registrationForm.firstname) }}
+        </div>
+
+        <div class="mb-4">
+          {{ form_label(registrationForm.lastname, null, {'label_attr': {'class': 'block text-gray-700 text-sm font-bold mb-2'}}) }}
+          {{ form_widget(registrationForm.lastname, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700'}}) }}
+          {{ form_errors(registrationForm.lastname) }}
+        </div>
+
+        <div class="mb-4">
+          {{ form_label(registrationForm.email, null, {'label_attr': {'class': 'block text-gray-700 text-sm font-bold mb-2'}}) }}
+          {{ form_widget(registrationForm.email, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700'}}) }}
+          {{ form_errors(registrationForm.email) }}
+        </div>
+
+        <div class="mb-6">
+          {{ form_label(registrationForm.plainPassword, 'Mot de passe', {'label_attr': {'class': 'block text-gray-700 text-sm font-bold mb-2'}}) }}
+          {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700'}}) }}
+          {{ form_errors(registrationForm.plainPassword) }}
+        </div>
+
+        <div class="flex items-center justify-between">
+          <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            S'inscrire
+          </button>
+        </div>
+      {{ form_end(registrationForm) }}
+    </div>
+  </div>
+{% endblock %}
