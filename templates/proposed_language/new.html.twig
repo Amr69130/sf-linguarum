@@ -8,23 +8,43 @@
       <h1 class="text-2xl font-bold mb-6 text-center">Propose une langue ou un dialecte à ajouter !</h1>
 
       {{ form_start(form) }}
+
+        
         <div class="mb-4">
           {{ form_label(form.name, null, {'label_attr': {'class': 'block text-gray-700 text-sm font-bold mb-2'}}) }}
           {{ form_widget(form.name, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700'}}) }}
           {{ form_errors(form.name) }}
         </div>
 
+        
         <div class="mb-6">
           {{ form_label(form.description, null, {'label_attr': {'class': 'block text-gray-700 text-sm font-bold mb-2'}}) }}
           {{ form_widget(form.description, {'attr': {'class': 'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700'}}) }}
           {{ form_errors(form.description) }}
         </div>
 
+        
+        <div class="mb-6">
+          <label class="block text-gray-700 text-sm font-bold mb-2">Type de langue</label>
+          <div class="flex gap-4">
+            {% for choice in form.type %}
+              <label class="inline-flex items-center">
+                {{ form_widget(choice, {'attr': {'class': 'form-radio h-4 w-4 text-blue-600'}}) }}
+                <span class="ml-2 text-gray-700">{{ choice.vars.label }}</span>
+              </label>
+            {% endfor %}
+          </div>
+          {{ form_errors(form.type) }}
+        </div>
+
+        
         <div class="flex items-center justify-between">
-          <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          <button type="submit"
+                  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             Proposer
           </button>
         </div>
+
       {{ form_end(form) }}
     </div>
   </div>
