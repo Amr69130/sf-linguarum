@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -36,6 +38,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     private ?string $lastname = null;
+
+    /**
+     * @var Collection<int, ProposedLanguage>
+     */
+    #[ORM\OneToMany(targetEntity: ProposedLanguage::class, mappedBy: 'user', orphanRemoval: true)]
+    private Collection $proposedLanguages;
+
+    public function __construct()
+    {
+        $this->proposedLanguages = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -113,6 +126,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastname(string $lastname): static
     {
         $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ProposedLanguage>
+     */
+    public function getProposedLanguages(): Collection
+    {
+        return $this->proposedLanguages;
+    }
+
+    public function addProposedLanguage(ProposedLanguage $proposedLanguage): static
+    {
+        if (!$this->proposedLanguages->contains($proposedLanguage)) {
+            $this->proposedLanguages->add($proposedLanguage);
+            $proposedLanguage->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProposedLanguage(ProposedLanguage $proposedLanguage): static
+    {
+        if ($this->proposedLanguages->removeElement($proposedLanguage)) {
+            // set the owning side to null (unless already changed)
+            if ($proposedLanguage->getUser() === $this) {
+                $proposedLanguage->setUser(null);
+            }
+        }
 
         return $this;
     }
