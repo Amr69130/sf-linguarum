@@ -31,5 +31,9 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Langues', 'fas fa-language', Language::class);
         yield MenuItem::linkToCrud('Proposed Languages', 'fas fa-language', ProposedLanguage::class);
+        yield MenuItem::linkToUrl('To-Do List', 'fas fa-arrow-left', $this->generateUrl('admin_todo'));
+        yield MenuItem::linkToUrl('Retour Accueil', 'fas fa-arrow-left', $this->generateUrl('app_home'));
+
+
     }
 }
