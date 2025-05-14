@@ -117,5 +117,7 @@ je vais devoir créer un todo si le language est approuvé alors il rentre dans 
 donc un controller AdminTodoController
 ainsi qu'un Template admin/admintodo/index
 dans la page de todo il y a un bouton de validation sous chaque language proposé pour rediriger vers l'ajout manuel d'une langue dans le easyadmin (préremplie)
-
-todo : faire en sorte que ce soit des names et pas des id dans le easyadmin pour les users et les languages
+j'ai ajouter les users dans le crud du admin
+j'ai fait en sorte que dans le crud proposed languages il y a le nom du user qui propose et pas le id
+j'ai aussi fait en sorte que dans le crud language il y ai le nom de la langue parente et pas l'id
+todo : faire en sorte que ce soit des names et pas des id dans le easyadmin pour les users et les languages lors de l'ajout d'un new

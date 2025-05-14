@@ -25,7 +25,8 @@ class ProposedLanguageCrudController extends AbstractCrudController
             TextField::new('name', 'Nom de la langue'),
             TextareaField::new('description', 'Description'),
             DateTimeField::new('submittedAt', 'Date de soumission')->hideOnForm(),
-            AssociationField::new('user', 'Utilisateur')->hideOnForm(),
+
+            AssociationField::new('user', 'Utilisateur')->autocomplete(),
             BooleanField::new('isApproved', 'Approuvée ?'),
         ];
     }
