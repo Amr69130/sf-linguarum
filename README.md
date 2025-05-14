@@ -116,4 +116,6 @@ dans mon proposedlanguagecrudcontroller j'ai caché le user car l'admin n'as pas
 je vais devoir créer un todo si le language est approuvé alors il rentre dans une sorte de TODOLIST présente sur la navbar du admin
 donc un controller AdminTodoController
 ainsi qu'un Template admin/admintodo/index
-dans la page de todo il y a un bouton de validation sous chaque language proposé pour rediriger vers l'ajout manuel d'une langue dans le easyadmin
+dans la page de todo il y a un bouton de validation sous chaque language proposé pour rediriger vers l'ajout manuel d'une langue dans le easyadmin (préremplie)
+
+todo : faire en sorte que ce soit des names et pas des id dans le easyadmin pour les users et les languages

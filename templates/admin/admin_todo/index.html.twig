@@ -18,7 +18,7 @@
 
               {# ici un bouton qui redirige vers ajout d'une langue manuellement #}
               <div class="flex items-center justify-between">
-                <a href="{{ path('admin', { crudAction: 'new', entity: 'Language' }) }}"><button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Ajouter manuellement</button></a>
+                <a href="{{ path('admin', { crudAction: 'new', entity: 'Language', name: language.name, description: language.description }) }}"><button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Ajouter manuellement</button></a>
               </div>
             </li>
           {% endfor %}
