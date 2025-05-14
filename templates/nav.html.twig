@@ -22,6 +22,7 @@
           {# technique recommandée (pour avoir un lien admin si l'user connecté est l'admin) #}
           {% if is_granted('ROLE_ADMIN') %}
             <a href="{{ path('admin') }}" class="hover:bg-gray-900 px-3 py-2 rounded-md text-sm font-medium uppercase">Admin</a>
+            <a href="{{ path('proposed_language_new') }}" class="hover:bg-gray-900 px-3 py-2 rounded-md text-sm font-medium uppercase">To-Do List</a>
           {% endif %}
         {% else %}
           <a href="{{ path('app_login') }}" class="hover:bg-gray-900 px-3 py-2 rounded-md text-sm font-medium uppercase">Login</a>

@@ -82,6 +82,9 @@ class ProposedLanguage
 
     private ?string $type = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isApproved = null;
+
     public function getType(): ?string
     {
         return $this->type;
@@ -90,6 +93,18 @@ class ProposedLanguage
     public function setType(string $type): self
     {
         $this->type = $type;
+        return $this;
+    }
+
+    public function isApproved(): ?bool
+    {
+        return $this->isApproved;
+    }
+
+    public function setIsApproved(?bool $isApproved): static
+    {
+        $this->isApproved = $isApproved;
+
         return $this;
     }
 }

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Languages à ajouter
+{% endblock %}
+
+{% block body %}
+  <div class="min-h-screen bg-gray-100 py-10 px-4">
+    <div class="max-w-3xl mx-auto bg-white shadow-md rounded p-6">
+      <h1 class="text-2xl font-bold mb-6 text-center">Langues proposées à ajouter</h1>
+
+      {% if approvedLanguages is not empty %}
+        <ul class="list-disc pl-6 space-y-2">
+          {% for language in approvedLanguages %}
+            <li>
+              <span class="font-semibold">{{ language.name }}</span><br />
+              <span class="text-sm text-gray-600">{{ language.description }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="text-gray-700 text-center">Aucune langue approuvée à ajouter pour le moment.</p>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

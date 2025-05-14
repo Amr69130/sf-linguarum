@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Language;
+use App\Entity\ProposedLanguage;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -29,5 +30,6 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Langues', 'fas fa-language', Language::class);
+        yield MenuItem::linkToCrud('Proposed Languages', 'fas fa-language', ProposedLanguage::class);
     }
 }
