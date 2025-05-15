@@ -5,35 +5,40 @@
 {% endblock %}
 
 {% block body %}
-  <div class="min-h-screen bg-cover bg-center p-10" style="background-image: url('{{ asset('images/bg2.jpg') }}');">
-    <h1 class="text-3xl font-bold mb-10 text-center text-gray-900 drop-shadow">Arbre généalogique des langues</h1>
-    <p>
-      Voici une liste non-exhaustive de quelques langues et leurs famille, inscrivez-vous : <a class="md:font-bold" href="{{ path('app_register') }}">ici</a> pour en proposer d'autres !
+  <div class="min-h-screen bg-cover bg-center px-4 py-12" style="background-image: url('{{ asset('images/bg2.jpg') }}');">
+    <h1 class="text-4xl font-extrabold mb-8 text-center text-gray-900 drop-shadow-sm">Arbre généalogique des langues</h1>
+
+    <p class="text-center text-gray-800 mb-10 text-lg">
+      Voici une liste non-exhaustive de quelques langues et leurs familles. <br />
+      Inscrivez-vous
+      <a class="underline font-semibold text-indigo-700 hover:text-indigo-500" href="{{ path('app_register') }}">ici</a>
+      pour en proposer d'autres !
     </p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8">
       {% for language in languages %}
         {% if language.parent is null %}
-          <div class="group relative">
-            <!-- Langue mère -->
-            <a href="{{ path('language_details', { id: language.id }) }}" class="block p-6 rounded-xl shadow-lg border border-white/30 bg-white/10 backdrop-blur-xl hover:bg-white/20 transition-all duration-300">
-              <h3 class="text-xl font-bold mb-4 text-gray-900">{{ language.name }}</h3>
-              <p class="text-gray-800 text-sm">{{ language.description }}</p>
+          <div class="bg-white/80 backdrop-blur-sm border border-gray-200 rounded-xl shadow-md p-6">
+            <!-- Langue principale -->
+            <a href="{{ path('language_details', { id: language.id }) }}" class="block hover:scale-[1.02] transition-transform">
+              <h3 class="text-xl font-bold text-gray-800">{{ language.name }}</h3>
+              <p class="text-gray-600 text-sm mt-2">{{ language.description }}</p>
             </a>
 
             {% if (language.children|length) > 0 %}
-              <div class="ml-6 mt-4 border-l-2 border-indigo-300 pl-4 space-y-3">
+              <div class="mt-4 pl-4 border-l-4 border-indigo-300 space-y-3">
                 {% for child in language.children %}
-                  <!-- Langue enfant -->
-                  <a href="{{ path('language_details', { id: child.id }) }}" class="block p-4 rounded-lg border border-white/30 bg-white/10 backdrop-blur-xl hover:bg-white/20 transition-all">↳ <span class="text-gray-900">{{ child.name }}</span></a>
+                  <div>
+                    <a href="{{ path('language_details', { id: child.id }) }}" class="block text-gray-700 font-medium hover:underline">↳ {{ child.name }}</a>
 
-                  {% if (child.children|length) > 0 %}
-                    <div class="ml-6 mt-2 border-l-2 border-indigo-200 pl-4 space-y-2">
-                      {% for grandchild in child.children %}
-                        <!-- Sous-langue -->
-                        <a href="{{ path('language_details', { id: grandchild.id }) }}" class="block p-3 rounded-md border border-white/30 bg-white/10 backdrop-blur-xl hover:bg-white/20 transition-all text-sm">↳ <span class="text-gray-900">{{ grandchild.name }}</span></a>
-                      {% endfor %}
-                    </div>
-                  {% endif %}
+                    {% if (child.children|length) > 0 %}
+                      <div class="mt-2 ml-4 pl-4 border-l-2 border-indigo-200 space-y-2">
+                        {% for grandchild in child.children %}
+                          <a href="{{ path('language_details', { id: grandchild.id }) }}" class="block text-gray-600 text-sm hover:underline">↳ {{ grandchild.name }}</a>
+                        {% endfor %}
+                      </div>
+                    {% endif %}
+                  </div>
                 {% endfor %}
               </div>
             {% endif %}
