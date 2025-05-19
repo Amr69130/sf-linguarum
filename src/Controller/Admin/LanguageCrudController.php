@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Language;
+use App\Entity\ProposedLanguage;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -50,4 +52,24 @@ class LanguageCrudController extends AbstractCrudController
             AssociationField::new('parent', 'Langue parente')->autocomplete(),
         ];
     }
+
+    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        if (!$entityInstance instanceof Language)
+            return;
+
+        $request = $this->requestStack->getCurrentRequest();
+        $proposedId = $request->query->get('proposedLanguageId');
+
+        if ($proposedId) {
+            $proposedLanguage = $entityManager->getRepository(ProposedLanguage::class)->find($proposedId);
+            if ($proposedLanguage) {
+                $proposedLanguage->setAddedToDatabase(true);
+                $entityManager->persist($proposedLanguage);
+            }
+        }
+
+        parent::persistEntity($entityManager, $entityInstance);
+    }
+
 }

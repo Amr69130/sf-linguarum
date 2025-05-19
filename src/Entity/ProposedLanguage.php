@@ -107,4 +107,18 @@ class ProposedLanguage
 
         return $this;
     }
+
+    #[ORM\Column(type: 'boolean')]
+    private bool $addedToDatabase = false;
+
+    public function isAddedToDatabase(): bool
+    {
+        return $this->addedToDatabase;
+    }
+
+    public function setAddedToDatabase(bool $addedToDatabase): self
+    {
+        $this->addedToDatabase = $addedToDatabase;
+        return $this;
+    }
 }

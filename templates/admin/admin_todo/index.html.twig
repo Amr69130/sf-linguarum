@@ -9,16 +9,24 @@
     <div class="max-w-3xl mx-auto bg-white shadow-md rounded p-6">
       <h1 class="text-2xl font-bold mb-6 text-center">TO-DO LIST</h1>
       <h2>Langues approuvées à ajouter en bdd</h2>
-      {% if approvedLanguages is not empty %}
-        <ul class="list-disc pl-6 space-y-2">
-          {% for language in approvedLanguages %}
-            <li>
-              <span class="font-semibold">{{ language.name }}</span><br />
-              <span class="text-sm text-gray-600">{{ language.description }}</span>
 
-              {# ici un bouton qui redirige vers ajout d'une langue manuellement #}
-              <div class="flex items-center justify-between">
-                <a href="{{ path('admin', { crudAction: 'new', entity: 'Language', name: language.name, description: language.description }) }}"><button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Ajouter manuellement</button></a>
+      {% if approvedLanguages is not empty %}
+        <ul class="list-disc pl-6 space-y-4">
+          {% for language in approvedLanguages %}
+            <li class="bg-gray-50 p-4 rounded shadow-sm">
+              <div class="flex flex-col gap-2">
+                <div>
+                  <span class="font-semibold text-lg">{{ language.name }}</span><br />
+                  <span class="text-sm text-gray-600">{{ language.description }}</span>
+                </div>
+
+                <div class="flex items-center justify-between mt-2">
+                  {% if language.addedToDatabase %}
+                    <span class="inline-block px-3 py-1 text-sm font-semibold text-green-800 bg-green-200 rounded">✅ Ajoutée</span>
+                  {% else %}
+                    <a href="{{ path('admin', { crudAction: 'new', entity: 'Language', name: language.name, description: language.description, proposedLanguageId: language.id }) }}"><button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Ajouter manuellement</button></a>
+                  {% endif %}
+                </div>
               </div>
             </li>
           {% endfor %}
