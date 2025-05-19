@@ -189,6 +189,54 @@ class LanguageFixtures extends Fixture
         $tibetan->setParent($protoSinoTibetan);
         $manager->persist($tibetan);
 
+        // Famille Caucasienne (ajoutée)
+        $protoCaucasian = new Language();
+        $protoCaucasian->setName('Proto-Caucasien (hypothétique)');
+        $protoCaucasian->setDescription('Langue hypothétique ancêtre des langues du Caucase.');
+        $manager->persist($protoCaucasian);
+
+        $northeastCaucasian = new Language();
+        $northeastCaucasian->setName('Caucasien du Nord-Est');
+        $northeastCaucasian->setDescription('Famille incluant les langues nakho-daghestaniennes.');
+        $northeastCaucasian->setParent($protoCaucasian);
+        $manager->persist($northeastCaucasian);
+
+        $chechen = new Language();
+        $chechen->setName('Tchétchène');
+        $chechen->setDescription('Langue nakh parlée en Tchétchénie.');
+        $chechen->setParent($northeastCaucasian);
+        $manager->persist($chechen);
+
+        $avar = new Language();
+        $avar->setName('Avar');
+        $avar->setDescription('Langue daghestanienne parlée au Daghestan.');
+        $avar->setParent($northeastCaucasian);
+        $manager->persist($avar);
+
+        $northwestCaucasian = new Language();
+        $northwestCaucasian->setName('Caucasien du Nord-Ouest');
+        $northwestCaucasian->setDescription('Famille comprenant les langues abkhazo-adygéennes.');
+        $northwestCaucasian->setParent($protoCaucasian);
+        $manager->persist($northwestCaucasian);
+
+        $abkhaz = new Language();
+        $abkhaz->setName('Abkhaze');
+        $abkhaz->setDescription('Langue caucasienne parlée en Abkhazie.');
+        $abkhaz->setParent($northwestCaucasian);
+        $manager->persist($abkhaz);
+
+        $southCaucasian = new Language();
+        $southCaucasian->setName('Caucasien du Sud (Kartvélien)');
+        $southCaucasian->setDescription('Famille de langues comprenant le géorgien.');
+        $southCaucasian->setParent($protoCaucasian);
+        $manager->persist($southCaucasian);
+
+        $georgian = new Language();
+        $georgian->setName('Géorgien');
+        $georgian->setDescription('Langue kartvélienne parlée en Géorgie.');
+        $georgian->setParent($southCaucasian);
+        $manager->persist($georgian);
+
         $manager->flush();
     }
 }
