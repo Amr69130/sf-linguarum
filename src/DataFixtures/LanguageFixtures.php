@@ -191,7 +191,7 @@ class LanguageFixtures extends Fixture
 
         // Famille Caucasienne (ajoutée)
         $protoCaucasian = new Language();
-        $protoCaucasian->setName('Proto-Caucasien (hypothétique)');
+        $protoCaucasian->setName('Proto-Caucasien');
         $protoCaucasian->setDescription('Langue hypothétique ancêtre des langues du Caucase.');
         $manager->persist($protoCaucasian);
 
