@@ -4,19 +4,28 @@ namespace App\Controller;
 
 use App\Repository\LanguageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request; // Pour récupérer les données GET/POST
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
-final class HomeController extends AbstractController
+class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
-    public function index(LanguageRepository $languageRepository): Response
+    public function index(Request $request, LanguageRepository $languageRepository): Response
     {
+        $query = $request->query->get('q');
 
-        $languages = $languageRepository->findAll();
+        if ($query) {
+            // Si recherche, on utilise la méthode dédiée
+            $languages = $languageRepository->searchByNameOrDescription($query);
+        } else {
+            // Sinon on charge toutes les langues (ou uniquement racines selon ta logique)
+            $languages = $languageRepository->findAll();
+        }
 
         return $this->render('home/index.html.twig', [
             'languages' => $languages,
+            'query' => $query,
         ]);
     }
 
@@ -35,3 +44,5 @@ final class HomeController extends AbstractController
         ]);
     }
 }
+
+
