@@ -16,10 +16,9 @@ class HomeController extends AbstractController
         $query = $request->query->get('q');
 
         if ($query) {
-            // Si recherche, on utilise la méthode dédiée
+
             $languages = $languageRepository->searchByNameOrDescription($query);
         } else {
-            // Sinon on charge toutes les langues (ou uniquement racines selon ta logique)
             $languages = $languageRepository->findAll();
         }
 

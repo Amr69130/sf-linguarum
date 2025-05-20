@@ -124,3 +124,5 @@ j'ai ajouter les users dans le crud du admin
 j'ai fait en sorte que dans le crud proposed languages il y a le nom du user qui propose et pas le id
 j'ai aussi fait en sorte que dans le crud language il y ai le nom de la langue parente et pas l'id
 todo : faire en sorte que ce soit des names et pas des id dans le easyadmin pour les users et les languages lors de l'ajout d'un new
+
+ajout d'une barre de recherche affichée sur hompage qui trouve les langues si on tape entièrement ou en partie un élément du name ou de la description
