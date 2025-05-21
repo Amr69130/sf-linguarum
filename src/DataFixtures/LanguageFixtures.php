@@ -165,6 +165,48 @@ class LanguageFixtures extends Fixture
         $hebrew->setParent($protoSemitic);
         $manager->persist($hebrew);
 
+        $protoBerber = new Language();
+        $protoBerber->setName('Proto-Berbere');
+        $protoBerber->setDescription('Langue ancestrale des langues berbères.');
+        $protoBerber->setParent($protoAfroAsiatic);
+        $manager->persist($protoBerber);
+
+        $kabyle = new Language();
+        $kabyle->setName('Kabyle');
+        $kabyle->setDescription('Langue berbère parlée en Algérie.');
+        $kabyle->setParent($protoBerber);
+        $manager->persist($kabyle);
+
+        $tachelhit = new Language();
+        $tachelhit->setName('Tachelhit');
+        $tachelhit->setDescription('Langue berbère parlée au Maroc.');
+        $tachelhit->setParent($protoBerber);
+        $manager->persist($tachelhit);
+
+        $protoCushitic = new Language();
+        $protoCushitic->setName('Proto-Couchitique');
+        $protoCushitic->setDescription('Langue ancestrale des langues couchitiques.');
+        $protoCushitic->setParent($protoAfroAsiatic);
+        $manager->persist($protoCushitic);
+
+        $somali = new Language();
+        $somali->setName('Somali');
+        $somali->setDescription('Langue couchitique parlée en Somalie.');
+        $somali->setParent($protoCushitic);
+        $manager->persist($somali);
+
+        $afar = new Language();
+        $afar->setName('Afar');
+        $afar->setDescription('Langue couchitique parlée à Djibouti et en Éthiopie.');
+        $afar->setParent($protoCushitic);
+        $manager->persist($afar);
+
+        $ancientEgyptian = new Language();
+        $ancientEgyptian->setName('Égyptien Ancien');
+        $ancientEgyptian->setDescription('Langue chamito-sémitique de l\'Égypte ancienne.');
+        $ancientEgyptian->setParent($protoAfroAsiatic);
+        $manager->persist($ancientEgyptian);
+
         // Famille Sino-tibétaine
         $protoSinoTibetan = new Language();
         $protoSinoTibetan->setName('Proto-Sino-Tibétain');
@@ -189,7 +231,37 @@ class LanguageFixtures extends Fixture
         $tibetan->setParent($protoSinoTibetan);
         $manager->persist($tibetan);
 
-        // Famille Caucasienne (ajoutée)
+        $burmese = new Language();
+        $burmese->setName('Birman');
+        $burmese->setDescription('Langue tibéto-birmane parlée au Myanmar.');
+        $burmese->setParent($protoSinoTibetan);
+        $manager->persist($burmese);
+
+        $dzongkha = new Language();
+        $dzongkha->setName('Dzongkha');
+        $dzongkha->setDescription('Langue tibéto-birmane parlée au Bhoutan.');
+        $dzongkha->setParent($protoSinoTibetan);
+        $manager->persist($dzongkha);
+
+        $hakka = new Language();
+        $hakka->setName('Hakka');
+        $hakka->setDescription('Langue chinoise parlée en Chine du Sud.');
+        $hakka->setParent($protoSinoTibetan);
+        $manager->persist($hakka);
+
+        $wu = new Language();
+        $wu->setName('Wu');
+        $wu->setDescription('Langue chinoise parlée autour de Shanghai.');
+        $wu->setParent($protoSinoTibetan);
+        $manager->persist($wu);
+
+        $min = new Language();
+        $min->setName('Min Nan');
+        $min->setDescription('Langue chinoise du sud-est, parlée à Taïwan et Fujian.');
+        $min->setParent($protoSinoTibetan);
+        $manager->persist($min);
+
+        // Famille Caucasienne
         $protoCaucasian = new Language();
         $protoCaucasian->setName('Proto-Caucasien');
         $protoCaucasian->setDescription('Langue hypothétique ancêtre des langues du Caucase.');
@@ -225,6 +297,18 @@ class LanguageFixtures extends Fixture
         $abkhaz->setParent($northwestCaucasian);
         $manager->persist($abkhaz);
 
+        $circassian = new Language();
+        $circassian->setName('Tcherkesse');
+        $circassian->setDescription('Langue nord-ouest caucasienne parlée au Caucase.');
+        $circassian->setParent($northwestCaucasian);
+        $manager->persist($circassian);
+
+        $adyghe = new Language();
+        $adyghe->setName('Adyghé');
+        $adyghe->setDescription('Langue abkhazo-adygée parlée en Russie.');
+        $adyghe->setParent($northwestCaucasian);
+        $manager->persist($adyghe);
+
         $southCaucasian = new Language();
         $southCaucasian->setName('Caucasien du Sud (Kartvélien)');
         $southCaucasian->setDescription('Famille de langues comprenant le géorgien.');
@@ -236,6 +320,18 @@ class LanguageFixtures extends Fixture
         $georgian->setDescription('Langue kartvélienne parlée en Géorgie.');
         $georgian->setParent($southCaucasian);
         $manager->persist($georgian);
+
+        $mingrelian = new Language();
+        $mingrelian->setName('Mingrélien');
+        $mingrelian->setDescription('Langue kartvélienne parlée en Géorgie.');
+        $mingrelian->setParent($southCaucasian);
+        $manager->persist($mingrelian);
+
+        $laz = new Language();
+        $laz->setName('Laz');
+        $laz->setDescription('Langue kartvélienne parlée sur la côte de la mer Noire.');
+        $laz->setParent($southCaucasian);
+        $manager->persist($laz);
 
         $manager->flush();
     }
