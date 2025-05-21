@@ -126,3 +126,5 @@ j'ai aussi fait en sorte que dans le crud language il y ai le nom de la langue p
 todo : faire en sorte que ce soit des names et pas des id dans le easyadmin pour les users et les languages lors de l'ajout d'un new
 
 ajout d'une barre de recherche affichée sur hompage qui trouve les langues si on tape entièrement ou en partie un élément du name ou de la description
+
+Recursivité : Sur la page d’accueil, les langues sont affichées sous forme d’un arbre généalogique. Chaque langue principale (sans parent) est listée avec ses langues descendantes, quelle que soit leur profondeur. L’affichage est entièrement récursif, ce qui permet de visualiser plusieurs générations de langues (ex. : proto-indo-européen → latin → français → verlan).

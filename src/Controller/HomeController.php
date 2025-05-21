@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Repository\LanguageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request; // Pour récupérer les données GET/POST
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -16,10 +16,9 @@ class HomeController extends AbstractController
         $query = $request->query->get('q');
 
         if ($query) {
-
             $languages = $languageRepository->searchByNameOrDescription($query);
         } else {
-            $languages = $languageRepository->findAll();
+            $languages = $languageRepository->findRootLanguages(); // modifié ici
         }
 
         return $this->render('home/index.html.twig', [
@@ -27,7 +26,6 @@ class HomeController extends AbstractController
             'query' => $query,
         ]);
     }
-
 
     #[Route('/language/{id}', name: 'language_details')]
     public function details(LanguageRepository $languageRepository, int $id): Response
@@ -43,5 +41,3 @@ class HomeController extends AbstractController
         ]);
     }
 }
-
-

@@ -36,4 +36,16 @@ class LanguageRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+    // src/Repository/LanguageRepository.php
+
+    public function findRootLanguages(): array
+    {
+        return $this->createQueryBuilder('l')
+            ->leftJoin('l.children', 'c') // chargement des enfants au premier niveau
+            ->addSelect('c')
+            ->where('l.parent IS NULL')
+            ->getQuery()
+            ->getResult();
+    }
+
 }

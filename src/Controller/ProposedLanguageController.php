@@ -34,7 +34,7 @@ class ProposedLanguageController extends AbstractController
             $entityManager->persist($proposedLanguage);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Votre proposition de langue a été enregistrée avec succès !');
+            $this->addFlash('success', 'Votre proposition de langue a été enregistrée avec succès ! L\'administrateur la validera dans les plus brefs délais.');
 
             return $this->redirectToRoute('app_home');
         }

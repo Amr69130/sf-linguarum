@@ -23,7 +23,7 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8">
       {% if query is defined and query %}
-        {# Mode recherche : on affiche toutes les langues trouvées, sans hiérarchie #}
+        {# Mode recherche : résultats plats #}
         {% if languages is empty %}
           <p class="col-span-full text-center text-gray-700">Aucune langue ne correspond à votre recherche.</p>
         {% else %}
@@ -40,35 +40,39 @@
           {% endfor %}
         {% endif %}
       {% else %}
-        {# Mode normal : affichage en arbre, uniquement les langues racines #}
+        {# Mode arbre : hiérarchie récursive #}
+
+        {% macro render_language(language, level) %}
+          <div class="ml-{{ level * 4 }} mt-2">
+            <a href="{{ path('language_details', { id: language.id }) }}" class="block {{ level == 0 ? 'text-gray-800 font-semibold text-lg' : level == 1 ? 'text-gray-700 font-medium' : 'text-gray-600 text-sm' }} hover:underline">{{ '↳ ' ~ language.name }}</a>
+
+            {% if (language.children|length) > 0 %}
+              <div class="pl-4 border-l-2 border-indigo-200 mt-1 space-y-1">
+                {% for child in language.children %}
+                  {{ _self.render_language(child, level + 1) }}
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        {% endmacro %}
+
+        {% import _self as macros %}
+
         {% for language in languages %}
-          {% if language.parent is null %}
-            <div class="bg-white/80 backdrop-blur-sm border border-gray-200 rounded-xl shadow-md p-6">
-              <!-- Langue principale -->
-              <a href="{{ path('language_details', { id: language.id }) }}" class="block hover:scale-[1.02] transition-transform">
-                <h3 class="text-xl font-bold text-gray-800">{{ language.name }}</h3>
-                <p class="text-gray-600 text-sm mt-2">{{ language.description }}</p>
-              </a>
+          <div class="bg-white/80 backdrop-blur-sm border border-gray-200 rounded-xl shadow-md p-6">
+            <a href="{{ path('language_details', { id: language.id }) }}" class="block hover:scale-[1.02] transition-transform">
+              <h3 class="text-xl font-bold text-gray-800">{{ language.name }}</h3>
+              <p class="text-gray-600 text-sm mt-2">{{ language.description }}</p>
+            </a>
 
-              {% if (language.children|length) > 0 %}
-                <div class="mt-4 pl-4 border-l-4 border-indigo-300 space-y-3">
-                  {% for child in language.children %}
-                    <div>
-                      <a href="{{ path('language_details', { id: child.id }) }}" class="block text-gray-700 font-medium hover:underline">↳ {{ child.name }}</a>
-
-                      {% if (child.children|length) > 0 %}
-                        <div class="mt-2 ml-4 pl-4 border-l-2 border-indigo-200 space-y-2">
-                          {% for grandchild in child.children %}
-                            <a href="{{ path('language_details', { id: grandchild.id }) }}" class="block text-gray-600 text-sm hover:underline">↳ {{ grandchild.name }}</a>
-                          {% endfor %}
-                        </div>
-                      {% endif %}
-                    </div>
-                  {% endfor %}
-                </div>
-              {% endif %}
-            </div>
-          {% endif %}
+            {% if (language.children|length) > 0 %}
+              <div class="mt-4 pl-4 border-l-4 border-indigo-300 space-y-3">
+                {% for child in language.children %}
+                  {{ macros.render_language(child, 1) }}
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
         {% endfor %}
       {% endif %}
     </div>
