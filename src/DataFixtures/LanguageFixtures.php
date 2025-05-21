@@ -10,7 +10,10 @@ class LanguageFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+        // ---------------------------
         // Famille Indo-européenne
+        // ---------------------------
+
         $protoIndoEuropean = new Language();
         $protoIndoEuropean->setName('Proto-Indo-Européen');
         $protoIndoEuropean->setDescription('Langue mère des langues indo-européennes.');
@@ -91,247 +94,356 @@ class LanguageFixtures extends Fixture
         $protoSlavic->setParent($protoIndoEuropean);
         $manager->persist($protoSlavic);
 
+        $eastSlavic = new Language();
+        $eastSlavic->setName('Slave orientale');
+        $eastSlavic->setDescription('Sous-groupe des langues slaves de l’est.');
+        $eastSlavic->setParent($protoSlavic);
+        $manager->persist($eastSlavic);
+
         $russian = new Language();
         $russian->setName('Russe');
         $russian->setDescription('Langue slave orientale parlée en Russie.');
-        $russian->setParent($protoSlavic);
+        $russian->setParent($eastSlavic);
         $manager->persist($russian);
+
+        $ukrainian = new Language();
+        $ukrainian->setName('Ukrainien');
+        $ukrainian->setDescription('Langue slave orientale parlée en Ukraine.');
+        $ukrainian->setParent($eastSlavic);
+        $manager->persist($ukrainian);
+
+        $belarusian = new Language();
+        $belarusian->setName('Biélorusse');
+        $belarusian->setDescription('Langue slave orientale parlée au Bélarus.');
+        $belarusian->setParent($eastSlavic);
+        $manager->persist($belarusian);
+
+        $westSlavic = new Language();
+        $westSlavic->setName('Slave occidentale');
+        $westSlavic->setDescription('Sous-groupe des langues slaves de l’ouest.');
+        $westSlavic->setParent($protoSlavic);
+        $manager->persist($westSlavic);
 
         $polish = new Language();
         $polish->setName('Polonais');
         $polish->setDescription('Langue slave occidentale parlée en Pologne.');
-        $polish->setParent($protoSlavic);
+        $polish->setParent($westSlavic);
         $manager->persist($polish);
+
+        $czech = new Language();
+        $czech->setName('Tchèque');
+        $czech->setDescription('Langue slave occidentale parlée en Tchéquie.');
+        $czech->setParent($westSlavic);
+        $manager->persist($czech);
+
+        $slovak = new Language();
+        $slovak->setName('Slovaque');
+        $slovak->setDescription('Langue slave occidentale parlée en Slovaquie.');
+        $slovak->setParent($westSlavic);
+        $manager->persist($slovak);
+
+        $southSlavic = new Language();
+        $southSlavic->setName('Slave méridionale');
+        $southSlavic->setDescription('Sous-groupe des langues slaves du sud.');
+        $southSlavic->setParent($protoSlavic);
+        $manager->persist($southSlavic);
 
         $serbian = new Language();
         $serbian->setName('Serbe');
         $serbian->setDescription('Langue slave méridionale parlée en Serbie.');
-        $serbian->setParent($protoSlavic);
+        $serbian->setParent($southSlavic);
         $manager->persist($serbian);
 
-        // Groupe Indo-Iranien
+        $bulgarian = new Language();
+        $bulgarian->setName('Bulgare');
+        $bulgarian->setDescription('Langue slave méridionale parlée en Bulgarie.');
+        $bulgarian->setParent($southSlavic);
+        $manager->persist($bulgarian);
+
+        $slovenian = new Language();
+        $slovenian->setName('Slovène');
+        $slovenian->setDescription('Langue slave méridionale parlée en Slovénie.');
+        $slovenian->setParent($southSlavic);
+        $manager->persist($slovenian);
+
+        // Indo-Iranien
         $protoIndoIranian = new Language();
         $protoIndoIranian->setName('Proto-Indo-Iranien');
-        $protoIndoIranian->setDescription('Langue mère des langues indo-iraniennes (hindi, persan, pachtou).');
+        $protoIndoIranian->setDescription('Langue mère des langues indo-iraniennes.');
         $protoIndoIranian->setParent($protoIndoEuropean);
         $manager->persist($protoIndoIranian);
 
+        $sanskrit = new Language();
+        $sanskrit->setName('Sanskrit');
+        $sanskrit->setDescription('Langue classique de l\'Inde, ancêtre de nombreuses langues indo-aryennes.');
+        $sanskrit->setParent($protoIndoIranian);
+        $manager->persist($sanskrit);
+
         $hindi = new Language();
         $hindi->setName('Hindi');
-        $hindi->setDescription('Langue indo-aryenne parlée en Inde.');
-        $hindi->setParent($protoIndoIranian);
+        $hindi->setDescription('Langue indo-aryenne moderne parlée en Inde.');
+        $hindi->setParent($sanskrit);
         $manager->persist($hindi);
+
+        $urdu = new Language();
+        $urdu->setName('Ourdou');
+        $urdu->setDescription('Langue proche du hindi, parlée au Pakistan.');
+        $urdu->setParent($sanskrit);
+        $manager->persist($urdu);
+
+        $avestan = new Language();
+        $avestan->setName('Avestique');
+        $avestan->setDescription('Langue ancienne d\'Iran, liée au zoroastrisme.');
+        $avestan->setParent($protoIndoIranian);
+        $manager->persist($avestan);
+
+        $persian = new Language();
+        $persian->setName('Persan');
+        $persian->setDescription('Langue iranienne parlée en Iran.');
+        $persian->setParent($avestan);
+        $manager->persist($persian);
 
         $pashto = new Language();
         $pashto->setName('Pachtou');
         $pashto->setDescription('Langue iranienne parlée en Afghanistan et au Pakistan.');
-        $pashto->setParent($protoIndoIranian);
+        $pashto->setParent($avestan);
         $manager->persist($pashto);
 
-        // Groupe Grec
-        $greek = new Language();
-        $greek->setName('Grec Moderne');
-        $greek->setDescription('Langue indo-européenne parlée en Grèce.');
-        $greek->setParent($protoIndoEuropean);
-        $manager->persist($greek);
-
-        // Famille Sémitique (dans Afro-asiatique)
-        $protoAfroAsiatic = new Language();
-        $protoAfroAsiatic->setName('Proto-Afro-Asiatique');
-        $protoAfroAsiatic->setDescription('Langue ancestrale des langues sémitiques, berbères, couchitiques, etc.');
-        $manager->persist($protoAfroAsiatic);
-
-        $protoSemitic = new Language();
-        $protoSemitic->setName('Ancien Sémitique');
-        $protoSemitic->setDescription('Langue mère des langues sémitiques.');
-        $protoSemitic->setParent($protoAfroAsiatic);
-        $manager->persist($protoSemitic);
-
-        $aramaic = new Language();
-        $aramaic->setName('Araméen');
-        $aramaic->setDescription('Langue sémitique ancienne parlée au Moyen-Orient.');
-        $aramaic->setParent($protoSemitic);
-        $manager->persist($aramaic);
-
-        $arabic = new Language();
-        $arabic->setName('Arabe');
-        $arabic->setDescription('Langue sémitique moderne parlée dans le monde arabe.');
-        $arabic->setParent($protoSemitic);
-        $manager->persist($arabic);
-
-        $hebrew = new Language();
-        $hebrew->setName('Hébreu');
-        $hebrew->setDescription('Langue sémitique parlée en Israël.');
-        $hebrew->setParent($protoSemitic);
-        $manager->persist($hebrew);
-
-        $protoBerber = new Language();
-        $protoBerber->setName('Proto-Berbere');
-        $protoBerber->setDescription('Langue ancestrale des langues berbères.');
-        $protoBerber->setParent($protoAfroAsiatic);
-        $manager->persist($protoBerber);
-
-        $kabyle = new Language();
-        $kabyle->setName('Kabyle');
-        $kabyle->setDescription('Langue berbère parlée en Algérie.');
-        $kabyle->setParent($protoBerber);
-        $manager->persist($kabyle);
-
-        $tachelhit = new Language();
-        $tachelhit->setName('Tachelhit');
-        $tachelhit->setDescription('Langue berbère parlée au Maroc.');
-        $tachelhit->setParent($protoBerber);
-        $manager->persist($tachelhit);
-
-        $protoCushitic = new Language();
-        $protoCushitic->setName('Proto-Couchitique');
-        $protoCushitic->setDescription('Langue ancestrale des langues couchitiques.');
-        $protoCushitic->setParent($protoAfroAsiatic);
-        $manager->persist($protoCushitic);
-
-        $somali = new Language();
-        $somali->setName('Somali');
-        $somali->setDescription('Langue couchitique parlée en Somalie.');
-        $somali->setParent($protoCushitic);
-        $manager->persist($somali);
-
-        $afar = new Language();
-        $afar->setName('Afar');
-        $afar->setDescription('Langue couchitique parlée à Djibouti et en Éthiopie.');
-        $afar->setParent($protoCushitic);
-        $manager->persist($afar);
-
-        $ancientEgyptian = new Language();
-        $ancientEgyptian->setName('Égyptien Ancien');
-        $ancientEgyptian->setDescription('Langue chamito-sémitique de l\'Égypte ancienne.');
-        $ancientEgyptian->setParent($protoAfroAsiatic);
-        $manager->persist($ancientEgyptian);
-
+        // ---------------------------
         // Famille Sino-tibétaine
+        // ---------------------------
+
+        // ---------------------------
+// Famille Sino-tibétaine
+// ---------------------------
+
         $protoSinoTibetan = new Language();
         $protoSinoTibetan->setName('Proto-Sino-Tibétain');
         $protoSinoTibetan->setDescription('Langue ancestrale des langues sino-tibétaines.');
         $manager->persist($protoSinoTibetan);
 
+        $sinitic = new Language();
+        $sinitic->setName('Langues sinitiques');
+        $sinitic->setDescription('Langues chinoises, branche majeure des sino-tibétaines.');
+        $sinitic->setParent($protoSinoTibetan);
+        $manager->persist($sinitic);
+
         $mandarin = new Language();
         $mandarin->setName('Mandarin');
-        $mandarin->setDescription('Langue sino-tibétaine parlée principalement en Chine.');
-        $mandarin->setParent($protoSinoTibetan);
+        $mandarin->setDescription('Langue sinitique la plus parlée, langue officielle de la Chine.');
+        $mandarin->setParent($sinitic);
         $manager->persist($mandarin);
 
         $cantonese = new Language();
         $cantonese->setName('Cantonais');
-        $cantonese->setDescription('Langue chinoise parlée dans le sud de la Chine.');
-        $cantonese->setParent($protoSinoTibetan);
+        $cantonese->setDescription('Langue sinitique parlée dans le sud de la Chine et Hong Kong.');
+        $cantonese->setParent($sinitic);
         $manager->persist($cantonese);
-
-        $tibetan = new Language();
-        $tibetan->setName('Tibétain');
-        $tibetan->setDescription('Langue sino-tibétaine parlée au Tibet.');
-        $tibetan->setParent($protoSinoTibetan);
-        $manager->persist($tibetan);
-
-        $burmese = new Language();
-        $burmese->setName('Birman');
-        $burmese->setDescription('Langue tibéto-birmane parlée au Myanmar.');
-        $burmese->setParent($protoSinoTibetan);
-        $manager->persist($burmese);
-
-        $dzongkha = new Language();
-        $dzongkha->setName('Dzongkha');
-        $dzongkha->setDescription('Langue tibéto-birmane parlée au Bhoutan.');
-        $dzongkha->setParent($protoSinoTibetan);
-        $manager->persist($dzongkha);
-
-        $hakka = new Language();
-        $hakka->setName('Hakka');
-        $hakka->setDescription('Langue chinoise parlée en Chine du Sud.');
-        $hakka->setParent($protoSinoTibetan);
-        $manager->persist($hakka);
 
         $wu = new Language();
         $wu->setName('Wu');
-        $wu->setDescription('Langue chinoise parlée autour de Shanghai.');
-        $wu->setParent($protoSinoTibetan);
+        $wu->setDescription('Dialecte chinois parlé notamment à Shanghai.');
+        $wu->setParent($sinitic);
         $manager->persist($wu);
 
-        $min = new Language();
-        $min->setName('Min Nan');
-        $min->setDescription('Langue chinoise du sud-est, parlée à Taïwan et Fujian.');
-        $min->setParent($protoSinoTibetan);
-        $manager->persist($min);
+        $minNan = new Language();
+        $minNan->setName('Min Nan');
+        $minNan->setDescription('Dialecte chinois parlé dans le sud-est, Taiwan.');
+        $minNan->setParent($sinitic);
+        $manager->persist($minNan);
 
-        // Famille Caucasienne
-        $protoCaucasian = new Language();
-        $protoCaucasian->setName('Proto-Caucasien');
-        $protoCaucasian->setDescription('Langue hypothétique ancêtre des langues du Caucase.');
-        $manager->persist($protoCaucasian);
+        $tibetoBurman = new Language();
+        $tibetoBurman->setName('Langues tibéto-birmanes');
+        $tibetoBurman->setDescription('Sous-groupe majeur des sino-tibétaines.');
+        $tibetoBurman->setParent($protoSinoTibetan);
+        $manager->persist($tibetoBurman);
 
-        $northeastCaucasian = new Language();
-        $northeastCaucasian->setName('Caucasien du Nord-Est');
-        $northeastCaucasian->setDescription('Famille incluant les langues nakho-daghestaniennes.');
-        $northeastCaucasian->setParent($protoCaucasian);
-        $manager->persist($northeastCaucasian);
+        $tibetan = new Language();
+        $tibetan->setName('Tibétain');
+        $tibetan->setDescription('Langue tibéto-birmane parlée au Tibet.');
+        $tibetan->setParent($tibetoBurman);
+        $manager->persist($tibetan);
 
-        $chechen = new Language();
-        $chechen->setName('Tchétchène');
-        $chechen->setDescription('Langue nakh parlée en Tchétchénie.');
-        $chechen->setParent($northeastCaucasian);
-        $manager->persist($chechen);
+        $dzongkha = new Language();
+        $dzongkha->setName('Dzongkha');
+        $dzongkha->setDescription('Langue tibéto-birmane officielle au Bhoutan.');
+        $dzongkha->setParent($tibetoBurman);
+        $manager->persist($dzongkha);
 
-        $avar = new Language();
-        $avar->setName('Avar');
-        $avar->setDescription('Langue daghestanienne parlée au Daghestan.');
-        $avar->setParent($northeastCaucasian);
-        $manager->persist($avar);
+        $burmese = new Language();
+        $burmese->setName('Birman');
+        $burmese->setDescription('Langue tibéto-birmane parlée en Birmanie (Myanmar).');
+        $burmese->setParent($tibetoBurman);
+        $manager->persist($burmese);
 
-        $northwestCaucasian = new Language();
-        $northwestCaucasian->setName('Caucasien du Nord-Ouest');
-        $northwestCaucasian->setDescription('Famille comprenant les langues abkhazo-adygéennes.');
-        $northwestCaucasian->setParent($protoCaucasian);
-        $manager->persist($northwestCaucasian);
+        $naga = new Language();
+        $naga->setName('Langues naga');
+        $naga->setDescription('Groupe de langues tibéto-birmanes parlées en Inde (Nagaland) et Birmanie.');
+        $naga->setParent($tibetoBurman);
+        $manager->persist($naga);
 
-        $abkhaz = new Language();
-        $abkhaz->setName('Abkhaze');
-        $abkhaz->setDescription('Langue caucasienne parlée en Abkhazie.');
-        $abkhaz->setParent($northwestCaucasian);
-        $manager->persist($abkhaz);
+        $manipuri = new Language();
+        $manipuri->setName('Manipuri (Meitei)');
+        $manipuri->setDescription('Langue tibéto-birmane parlée dans l\'État de Manipur en Inde.');
+        $manipuri->setParent($tibetoBurman);
+        $manager->persist($manipuri);
 
-        $circassian = new Language();
-        $circassian->setName('Tcherkesse');
-        $circassian->setDescription('Langue nord-ouest caucasienne parlée au Caucase.');
-        $circassian->setParent($northwestCaucasian);
-        $manager->persist($circassian);
 
-        $adyghe = new Language();
-        $adyghe->setName('Adyghé');
-        $adyghe->setDescription('Langue abkhazo-adygée parlée en Russie.');
-        $adyghe->setParent($northwestCaucasian);
-        $manager->persist($adyghe);
+        // ---------------------------
+        // Famille Afro-asiatique
+        // ---------------------------
 
-        $southCaucasian = new Language();
-        $southCaucasian->setName('Caucasien du Sud (Kartvélien)');
-        $southCaucasian->setDescription('Famille de langues comprenant le géorgien.');
-        $southCaucasian->setParent($protoCaucasian);
-        $manager->persist($southCaucasian);
+        $protoAfroAsiatic = new Language();
+        $protoAfroAsiatic->setName('Proto-Afro-Asiatique');
+        $protoAfroAsiatic->setDescription('Langue ancestrale des langues afro-asiatiques.');
+        $manager->persist($protoAfroAsiatic);
 
-        $georgian = new Language();
-        $georgian->setName('Géorgien');
-        $georgian->setDescription('Langue kartvélienne parlée en Géorgie.');
-        $georgian->setParent($southCaucasian);
-        $manager->persist($georgian);
+        $semitic = new Language();
+        $semitic->setName('Langues sémitiques');
+        $semitic->setDescription('Sous-groupe des langues afro-asiatiques.');
+        $semitic->setParent($protoAfroAsiatic);
+        $manager->persist($semitic);
 
-        $mingrelian = new Language();
-        $mingrelian->setName('Mingrélien');
-        $mingrelian->setDescription('Langue kartvélienne parlée en Géorgie.');
-        $mingrelian->setParent($southCaucasian);
-        $manager->persist($mingrelian);
+        $arabic = new Language();
+        $arabic->setName('Arabe');
+        $arabic->setDescription('Langue sémitique parlée dans de nombreux pays du Moyen-Orient et d’Afrique du Nord.');
+        $arabic->setParent($semitic);
+        $manager->persist($arabic);
 
-        $laz = new Language();
-        $laz->setName('Laz');
-        $laz->setDescription('Langue kartvélienne parlée sur la côte de la mer Noire.');
-        $laz->setParent($southCaucasian);
-        $manager->persist($laz);
+        $hebrew = new Language();
+        $hebrew->setName('Hébreu');
+        $hebrew->setDescription('Langue sémitique parlée en Israël.');
+        $hebrew->setParent($semitic);
+        $manager->persist($hebrew);
+
+        $amharic = new Language();
+        $amharic->setName('Amharique');
+        $amharic->setDescription('Langue sémitique parlée en Éthiopie.');
+        $amharic->setParent($semitic);
+        $manager->persist($amharic);
+
+        // Groupe berbère
+        $berber = new Language();
+        $berber->setName('Berbère');
+        $berber->setDescription('Langue afro-asiatique parlée en Afrique du Nord.');
+        $berber->setParent($protoAfroAsiatic);
+        $manager->persist($berber);
+
+        $kabyle = new Language();
+        $kabyle->setName('Kabyle');
+        $kabyle->setDescription('Dialecte berbère parlé en Algérie.');
+        $kabyle->setParent($berber);
+        $manager->persist($kabyle);
+
+        $tamasheq = new Language();
+        $tamasheq->setName('Tamasheq');
+        $tamasheq->setDescription('Dialecte berbère parlé par les Touaregs.');
+        $tamasheq->setParent($berber);
+        $manager->persist($tamasheq);
+
+        // Groupe couchitique
+        $cushitic = new Language();
+        $cushitic->setName('Langues couchitiques');
+        $cushitic->setDescription('Sous-groupe afro-asiatique parlé dans la Corne de l’Afrique.');
+        $cushitic->setParent($protoAfroAsiatic);
+        $manager->persist($cushitic);
+
+        $somali = new Language();
+        $somali->setName('Somali');
+        $somali->setDescription('Langue couchitique parlée en Somalie.');
+        $somali->setParent($cushitic);
+        $manager->persist($somali);
+
+        $afar = new Language();
+        $afar->setName('Afar');
+        $afar->setDescription('Langue couchitique parlée en Érythrée, Djibouti, Éthiopie.');
+        $afar->setParent($cushitic);
+        $manager->persist($afar);
+
+        // ---------------------------
+        // Famille Niger-Congo
+        // ---------------------------
+
+        $protoNigerCongo = new Language();
+        $protoNigerCongo->setName('Proto-Niger-Congo');
+        $protoNigerCongo->setDescription('Langue ancestrale des langues nigéro-congolaises.');
+        $manager->persist($protoNigerCongo);
+
+        $bantu = new Language();
+        $bantu->setName('Langues bantoues');
+        $bantu->setDescription('Sous-groupe des langues nigéro-congolaises.');
+        $bantu->setParent($protoNigerCongo);
+        $manager->persist($bantu);
+
+        $swahili = new Language();
+        $swahili->setName('Swahili');
+        $swahili->setDescription('Langue bantoue parlée en Afrique de l’Est.');
+        $swahili->setParent($bantu);
+        $manager->persist($swahili);
+
+        $zulu = new Language();
+        $zulu->setName('Zoulou');
+        $zulu->setDescription('Langue bantoue parlée en Afrique du Sud.');
+        $zulu->setParent($bantu);
+        $manager->persist($zulu);
+
+        $yoruba = new Language();
+        $yoruba->setName('Yoruba');
+        $yoruba->setDescription('Langue nigéro-congolaise parlée au Nigeria.');
+        $yoruba->setParent($protoNigerCongo);
+        $manager->persist($yoruba);
+
+        // ---------------------------
+        // Famille Altaïque (controversée)
+        // ---------------------------
+
+        $altaic = new Language();
+        $altaic->setName('Famille altaïque (hypothétique)');
+        $altaic->setDescription('Famille linguistique regroupant turcique, mongolique, toungouse.');
+        $manager->persist($altaic);
+
+        $turkic = new Language();
+        $turkic->setName('Langues turciques');
+        $turkic->setDescription('Sous-groupe altaïque.');
+        $turkic->setParent($altaic);
+        $manager->persist($turkic);
+
+        $turkish = new Language();
+        $turkish->setName('Turc');
+        $turkish->setDescription('Langue turcique parlée en Turquie.');
+        $turkish->setParent($turkic);
+        $manager->persist($turkish);
+
+        $mongolic = new Language();
+        $mongolic->setName('Langues mongoles');
+        $mongolic->setDescription('Sous-groupe altaïque.');
+        $mongolic->setParent($altaic);
+        $manager->persist($mongolic);
+
+        $mongolian = new Language();
+        $mongolian->setName('Mongol');
+        $mongolian->setDescription('Langue mongole parlée en Mongolie.');
+        $mongolian->setParent($mongolic);
+        $manager->persist($mongolian);
+
+        // ---------------------------
+        // Autres langues isolées ou petites familles
+        // ---------------------------
+
+        $basque = new Language();
+        $basque->setName('Basque');
+        $basque->setDescription('Langue isolée parlée dans les Pyrénées.');
+        $manager->persist($basque);
+
+        $hungarian = new Language();
+        $hungarian->setName('Hongrois');
+        $hungarian->setDescription('Langue finno-ougrienne parlée en Hongrie.');
+        $manager->persist($hungarian);
+
+        $finnish = new Language();
+        $finnish->setName('Finnois');
+        $finnish->setDescription('Langue finno-ougrienne parlée en Finlande.');
+        $manager->persist($finnish);
 
         $manager->flush();
     }
