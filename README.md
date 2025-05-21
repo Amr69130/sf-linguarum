@@ -128,3 +128,5 @@ todo : faire en sorte que ce soit des names et pas des id dans le easyadmin pour
 ajout d'une barre de recherche affichée sur hompage qui trouve les langues si on tape entièrement ou en partie un élément du name ou de la description
 
 Recursivité : Sur la page d’accueil, les langues sont affichées sous forme d’un arbre généalogique. Chaque langue principale (sans parent) est listée avec ses langues descendantes, quelle que soit leur profondeur. L’affichage est entièrement récursif, ce qui permet de visualiser plusieurs générations de langues (ex. : proto-indo-européen → latin → français → verlan).
+
+affichage des details des parents ET des enfant si il y en a avec le liens vers leurs details à eux

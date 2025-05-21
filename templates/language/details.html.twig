@@ -17,6 +17,19 @@
           </p>
         {% endif %}
 
+        <h2 class="text-gray-300 mt-6">Langues Filles :</h2>
+        {% if (language.children|length) > 0 %}
+          <ul class="text-gray-300 list-disc list-inside">
+            {% for child in language.children %}
+              <li>
+                <a href="{{ path('language_details', { id: child.id }) }}" class="underline hover:text-indigo-400">{{ child.name }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p class="text-gray-300 italic">Aucune langue fille</p>
+        {% endif %}
+
         <a href="{{ path('app_home') }}" class="mt-4 inline-block text-indigo-600 hover:text-indigo-800 text-lg">Retour à l'accueil</a>
       </div>
     </div>
