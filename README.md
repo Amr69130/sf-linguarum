@@ -100,7 +100,7 @@ git clone https://github.com/Amr69130/sf-linguarum.git
 # Installer les dépendances
 composer install
 
-# Configurer son acces bdd
+# Configurer son acces à la base de données
 creer un fichier .env.local à la racine et definir son propre DATABASE_URL
 
 # Créer la base de données
