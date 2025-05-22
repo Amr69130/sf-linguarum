@@ -100,9 +100,8 @@ git clone https://github.com/Amr69130/sf-linguarum.git
 # Installer les dépendances
 composer install
 
-# Installer les assets front-end
-npm install
-npm run dev
+# Configurer son acces bdd
+creer un fichier .env.local à la racine et definir son propre DATABASE_URL
 
 # Créer la base de données
 php bin/console doctrine:database:create
