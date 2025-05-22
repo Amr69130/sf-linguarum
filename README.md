@@ -58,6 +58,7 @@ Données linguistiques classées par familles (ex. : indo-européennes, sino-tib
 ## Ce qui reste à développer
 
 - Intégration d’une traduction automatique via API (LibreTranslate ou autre).
+- Ajouter la possibilité pour un utilisateur de signaler une fiche langue, avec remontée du signalement dans la to-do-list admin.
 - Visualisation graphique avancée de l’arbre (exemple : diagrammes dynamiques).
 - Pagination et optimisation des performances pour gérer de très grands ensembles de langues.
 

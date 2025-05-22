@@ -8,10 +8,11 @@
   <div class="min-h-screen bg-gray-100 py-10 px-4">
     <div class="max-w-3xl mx-auto bg-white shadow-md rounded p-6">
       <h1 class="text-2xl font-bold mb-6 text-center">TO-DO LIST</h1>
-      <h2>Langues approuvées à ajouter en bdd</h2>
+
+      <h2 class="text-xl font-semibold mb-2">Langues approuvées à ajouter en bdd</h2>
 
       {% if approvedLanguages is not empty %}
-        <ul class="list-disc pl-6 space-y-4">
+        <ul class="list-disc pl-6 space-y-4 mb-8">
           {% for language in approvedLanguages %}
             <li class="bg-gray-50 p-4 rounded shadow-sm">
               <div class="flex flex-col gap-2">
@@ -32,8 +33,30 @@
           {% endfor %}
         </ul>
       {% else %}
-        <p class="text-gray-700 text-center">Aucune langue approuvée à ajouter pour le moment.</p>
+        <p class="text-gray-700 text-center mb-8">Aucune langue approuvée à ajouter pour le moment.</p>
+      {% endif %}
+
+      <h2 class="text-xl font-semibold mb-2">Signalements utilisateurs à traiter</h2>
+
+      {# {% if userReports is not empty %}
+        <ul class="list-disc pl-6 space-y-4">
+          {% for report in userReports %}
+            <li class="bg-red-50 p-4 rounded shadow-sm">
+              <div class="flex flex-col gap-2">
+                <div>
+                  <span class="font-semibold text-lg">Langue signalée : {{ report.language.name }}</span><br />
+                  <span class="text-sm text-gray-600">Motif : {{ report.reason }}</span>
+                </div>
+                <div class="flex justify-end">
+                  <a href="{{ path('admin_report_review', { id: report.id }) }}"><button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Traiter</button></a>
+                </div>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="text-gray-700 text-center">Aucun signalement utilisateur pour le moment.</p>
       {% endif %}
     </div>
-  </div>
-{% endblock %}
+  </div> #}
+{% endblock %} 
