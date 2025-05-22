@@ -1,136 +1,94 @@
-linguarum :
+Linguarum:
 
-une application symfony qui permet d'explorer l'arbre généalogique des langues parlées dans le monde
+Linguarum est une application web développée avec Symfony 6.4, permettant d’explorer l’arbre généalogique des langues parlées dans le monde. Elle propose une visualisation hiérarchique (récursive) des relations entre langues, la gestion d’un back-office, ainsi qu’un système de contribution communautaire.
 
-j'ai crée mon nouveau projet symfony en version 6.4 webapp
+Fonctionnalités clés
+Exploration interactive des langues
+Affichage d’un arbre généalogique des langues via une structure récursive. Chaque langue peut contenir des sous-langues et être liée à une langue parente.
 
-j'ai installer le bundle tailwind avec la commande composer require
+Pages de détail pour chaque langue
+Description détaillée, liens vers langues parentes et enfants, navigation fluide dans la hiérarchie linguistique.
 
-j'ai crée mon repo sur GitHub et effectue mes 1ers commits et push (le tout sur branch master)
+Système d’authentification
+Connexion différenciée pour les utilisateurs et l’administrateur, avec redirections personnalisées selon le rôle.
 
-j'ai crée mon premiere controller (home) afin de tester et aussi d'en faire ma future page d'accueil
+Back-office avec EasyAdmin
+Gestion des utilisateurs, langues, propositions de langues, avec affichage des relations via noms plutôt que simples IDs.
 
-j'ai changer le style de la Template de la homePage via "assets>styles>app.css" où j'ai retiré le bg blue de body{} et dans le fichier de Template même "templates>home>index.html.twig" où j'ai simplement afficher un h1 ainsi qu'un p auquels j'ai attribué du style via les class proposées par tailwind.
+Contribution communautaire et workflow utilisateur
+Les utilisateurs peuvent s’inscrire, se connecter, puis proposer de nouvelles langues via un formulaire dédié. Chaque proposition est soumise à une pré-approbation par l’administrateur via son interface CRUD. Une fois pré-approuvée, la proposition rejoint une to-do-list d’administration, où l’administrateur décide de l’ajouter manuellement en base de données, validant ainsi officiellement la langue.
 
-j'ai commencer à editer et ajouter ce readme au projet.
+Recherche dynamique
+Barre de recherche permettant de trouver rapidement une langue selon son nom ou sa description.
 
-j'ai cree mon premier entity (language)
+Fixtures enrichies et organisées
+Données linguistiques classées par familles (ex. : indo-européennes, sino-tibétaines, austronésiennes, etc.) injectées via fixtures Symfony.
 
-j'ai creer ma migration avec le make:migrations
+Aspects techniques
+Technologies utilisées
+Symfony 6.4 WebApp
 
-j'ai executer avec le d:m:m
+TailwindCSS pour le style
 
-j'ai remove les deux dependances qui nous poseront problemes (stimulus ux turbo & doctrine messenger)
+Faker pour la génération de données de test
 
-Création de Fixtures
-J'ai créé des fixtures avec trois langues à des fins de test : le Proto-Indo-Européen, le Latin et le Français. Ces données sont insérées dans la base de données pour constituer une première structure de l’arbre généalogique des langues.
+EasyAdmin pour l’administration
 
-Affichage des données dans la vue
-J'ai mis en place un premier affichage des langues dans le template home/index.html.twig.
+Doctrine ORM
 
-Cette étape respecte l’architecture MVC de Symfony en suivant la logique suivante :
+Twig
 
-Controller : récupération des données via le LanguageRepository dans le contrôleur HomeController.
+Décisions techniques clés
+Suppression des dépendances Stimulus UX et Doctrine Messenger pour simplifier le projet.
 
-Repository : interrogation de la base de données pour obtenir l’ensemble des langues, y compris les relations parent-enfant.
+Tentatives de récupération de données via scraping (Wikipedia) et APIs (Glottolog, Wikidata) mises en pause faute de temps ou résultats satisfaisants.
 
-Vue (Template) : affichage d'une liste des langues avec sa langue mère si elle en dispose (simple boucle for avec if pour l'instant que je modifierai plus tard)
+Recours temporaire à des fixtures manuelles enrichies.
 
-j'ai cree une page detail pour tester l'affichage d'une langue unique (lorsqu'on clique dessus sur la homepage)
+Architecture MVC respectée pour une structure claire du code.
 
-ayant un server assez long sur Windows je me retrouve souvent avec avec l'erreur "maximum execution time of 30..." j'ai donc été rechercher comment corriger cela et une des solutions est de modifier ce parametre dans le .ini ; j'ai donc modifié ce dernier à 120 (cf Screenshot)
+Ce qui reste à développer
+Intégration d’une traduction automatique via API (LibreTranslate ou autre).
 
-je cherche à styliser un minimum pour avoir un rendu (temporaire) style arbre généalogique avec imbrication je me suis fait aider par une IA pour cela
+Visualisation graphique avancée de l’arbre (exemple : diagrammes dynamiques).
 
-je cherche désormais à intégrer un grand nombre de données , plutôt que d'ecrire manuellement des fixtures la question d'un fichier csv se pose, cependant ce que je croyais au debut simple comme interroger une api s'avère plus compliqué que prévu, je pensais à Wikidata ou même glottolog mais zero réponse, je vais donc faire du scrapping sur une page wikipedia libre de droits, là aussi pour le scrapping plusieurs solutions s'offrent à moi nottement une qui m'as attiré pour la science et le besoin de l'exercice en s'accordant parfaitement dans mon projet Symfony ; il s'agit de SYMFONY PANTHER mais au vu de l'utilité je penche plutôt vers le classique beautifulSoup car wikipedia = html et n'utilise pas d'animation JS donc pas besoin de panther.
+Pagination et optimisation des performances pour gérer de très grands ensembles de langues.
 
-j'ai beaucoup de difficultés à récuperer des données en scrapping pour l'instant (malgré l'aide de l'IA), il faudrait que je prenne un cours complet sur le sujet.
+Installation
 
-Pour avancer dans le projet je vais quand même devoir injecter des données je vais donc rajouter des fixtures à la main et me servir d'un faker pour eviter de rester bloqué , si il me reste du temps avant le rendu j'essayerai le scrapping sur wikipedia ou autre, j'essaierai également de recuperer directement un csv via une requete sur une api.
+# Cloner le dépôt
 
-etat avancement 2mai :
-➤ État actuel du projet (Résumé reformulé) :
-Fonctionnalité actuelle : Une page d'accueil affiche une liste de langues. Chaque langue est cliquable et mène à une page de détails individuels, fonctionnelle.
+git clone https://github.com/ton-utilisateur/linguarum.git
 
-Problème technique rencontré : Sur Windows, le temps d’exécution PHP limité (erreur "maximum execution time of 30 seconds") a été contourné en modifiant le fichier php.ini pour passer la limite à 120 secondes.
+# Installer les dépendances
 
-Style : Tu as commencé à styliser l’affichage des langues de façon à représenter un arbre généalogique, avec un effet visuel d’imbrication. Ce style est temporaire, mais il donne un bon aperçu du concept.
+composer install
 
-Données :
+# Installer les assets front-end
 
-Tu veux enrichir l’application avec un grand volume de langues et de relations parent/enfant.
+npm install
+npm run dev
 
-Tu as tenté d’utiliser Wikidata et Glottolog via des API, sans succès (résultats vides ou mal formatés).
+# Créer la base de données
 
-Tu t’es tourné vers le web scraping, ciblant Wikipedia.
+php bin/console doctrine:database:create
 
-Tu as considéré Symfony Panther (headless browser pour JS), mais as préféré BeautifulSoup car Wikipedia est en HTML pur.
+# Exécuter les migrations
 
-Tu rencontres des difficultés techniques pour scrapper les données, notamment pour localiser la section contenant les listes utiles.
+php bin/console doctrine:migrations:migrate
 
-Prochaine étape immédiate :
+# Charger les fixtures
 
-Pour ne pas rester bloqué, tu vas injecter manuellement des fixtures via Faker afin de continuer à développer et tester les fonctionnalités.
+php bin/console doctrine:fixtures:load
+Utilisation
+Accéder à la page d’accueil pour explorer l’arbre des langues.
 
-j'ai voulu ajouter une image dans le projet pour poouvoir la mettre en background et j'ai voulu faire comme en cours (assets/images) mais ca ne marchait pas j'ai donc vu sur internet qu'on pouvais égalementretrouver le chemain facilement en mettant le dossier images dans (public/images) j'ai donc fait ainsi,
+S’inscrire pour proposer de nouvelles langues.
 
-j'ai installer le bundle easyadmin et j'ai créer des users avec make:user , 1 admin + 2 users manuels et enfin 10 users fake (en ayant installer la dependance faker ) j'ai apporter des modification sur l'entité User manuellement j'ai rajouté firstname et lastname . apres avoir appliquer la migration j'ai été mettre à jour les fixtures puis j'ai re appliquer migrations et la charge des fixtures
+Les administrateurs peuvent gérer les langues, les utilisateurs et les propositions via EasyAdmin.
 
-j'ai créer une logique de login afin que l'admin puisse se connecter ainsi que les users, l'utilisation de "make:auth" en 1er lieu est abandonnée car depréciée plutôt utilisation du make:security:form-login
+Contribution
+Les contributions sont les bienvenues ! N’hésitez pas à ouvrir une issue ou soumettre une pull request.
 
-essai de conexion valide !
-
-modification de la vue pour ameliorer un peu le style
-
-lorsque le admin se log il est redirigé vers le crud
-lorsque c'est un user il est redirigé vers le home (plus tard il sera vers une page de user pour proposer languages et modifier son profil) j'ai utilisé la fonction onAuthentificationSucces dans AppAuthenticator.php qui se trouve dans un dossier security se trouvant lui-même dans src/ , certes depuis les nouvelles versions de Symfony tout à été refactorisé et nous ne sommes plus obligé de faire ainsi mais j'ai fait cela et ca fonctionne.
-
-todo : navbar presente sur homepage qui contient login si non log ; logout si déjà loggé et admin si loggé en tant que admin
-
-je cherche maintenant à modifier le style de la page easyadmin en y ajoutant ma navbar cependant il s'aver assez compliqué car je dois créer la Template du bundle manuellement puis aller créer manuellement un easy_admin.yaml dans les packages et l'un appelle l'autre et je me retrouve avec une boucle infinie qui fait crash Symfony je reste donc sur le easyadmin de base.
-
-je dois créer un formulaire d'inscription donc :
-RegistrationController ✅
-
-RegistrationFormType ✅
-
-La vue register.html.twig ✅
-
-Le formulaire bien relié à l'entité User ✅
-
-Et l'encodage du mot de passe dans le controller ✅
-
-j'ai ajoute lien register dans navbar
-
-je cree uneentityé proposedlanguage qui sera remplie avec les propositions de langues fournies par les users connectés
-
-je créer un formulaire de proposedlanguage
-
-j'ajoute le lien dans la navbar si connecté
-
-j'ai ajoute message flash si langue bien envoyée
-
-j'ai ajouter un crud easyadmin pour languageproposed
-dans mon proposedlanguagecrudcontroller j'ai caché le user car l'admin n'as pas à modifier ou supprimer l'user qui propose
-
-je vais devoir créer un todo si le language est approuvé alors il rentre dans une sorte de TODOLIST présente sur la navbar du admin
-donc un controller AdminTodoController
-ainsi qu'un Template admin/admintodo/index
-dans la page de todo il y a un bouton de validation sous chaque language proposé pour rediriger vers l'ajout manuel d'une langue dans le easyadmin (préremplie)
-
-lorsque la langue est ajoutée manuellement alors la todo-list lui donne le statut de AJOUTEE
-
-j'ai ajouter les users dans le crud du admin
-j'ai fait en sorte que dans le crud proposed languages il y a le nom du user qui propose et pas le id
-j'ai aussi fait en sorte que dans le crud language il y ai le nom de la langue parente et pas l'id
-todo : faire en sorte que ce soit des names et pas des id dans le easyadmin pour les users et les languages lors de l'ajout d'un new
-
-ajout d'une barre de recherche affichée sur hompage qui trouve les langues si on tape entièrement ou en partie un élément du name ou de la description
-
-Recursivité : Sur la page d’accueil, les langues sont affichées sous forme d’un arbre généalogique. Chaque langue principale (sans parent) est listée avec ses langues descendantes, quelle que soit leur profondeur. L’affichage est entièrement récursif, ce qui permet de visualiser plusieurs générations de langues (ex. : proto-indo-européen → latin → français → verlan).
-
-affichage des details des parents ET des enfant si il y en a avec le liens vers leurs details à eux
-
-projet : rajouter une possibilité de traduire un mot dans une langue cible (lorsqu'on clique sur anglais j'ai son detail puis une barre ou je peux ecrire bonjour et ça me marque HELLO) cela necessite d'aller requeter une api j'ai commencé par essayer de requeter google pour google translate mais API payante etc sinon il y avait libretranslate mais cela s'est avéré tres compliqué car je devais rajouter une languageCode pour chaque langue ("fr" pour francais, "en" pour anglais, "it" pour italien,.....) logique tres compliquée par manque de temps je le ferais plus tard cela n'apparaitra pa dans le rendu
-
-Extended and reorganized language fixtures
+Licence
+Ce projet est sous licence MIT.
