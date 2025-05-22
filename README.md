@@ -132,3 +132,5 @@ Recursivité : Sur la page d’accueil, les langues sont affichées sous forme d
 affichage des details des parents ET des enfant si il y en a avec le liens vers leurs details à eux
 
 projet : rajouter une possibilité de traduire un mot dans une langue cible (lorsqu'on clique sur anglais j'ai son detail puis une barre ou je peux ecrire bonjour et ça me marque HELLO) cela necessite d'aller requeter une api j'ai commencé par essayer de requeter google pour google translate mais API payante etc sinon il y avait libretranslate mais cela s'est avéré tres compliqué car je devais rajouter une languageCode pour chaque langue ("fr" pour francais, "en" pour anglais, "it" pour italien,.....) logique tres compliquée par manque de temps je le ferais plus tard cela n'apparaitra pa dans le rendu
+
+Extended and reorganized language fixtures
