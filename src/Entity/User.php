@@ -45,9 +45,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: ProposedLanguage::class, mappedBy: 'user', orphanRemoval: true)]
     private Collection $proposedLanguages;
 
+    /**
+     * @var Collection<int, Comment>
+     */
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'user')]
+    private Collection $comments;
+
+    /**
+     * @var Collection<int, Vote>
+     */
+    #[ORM\OneToMany(targetEntity: Vote::class, mappedBy: 'user')]
+    private Collection $votes;
+
+    /**
+     * @var Collection<int, Language>
+     */
+    #[ORM\ManyToMany(targetEntity: Language::class, inversedBy: 'usersWhoFavorited')]
+    private Collection $favoriteLanguages;
+
     public function __construct()
     {
         $this->proposedLanguages = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->votes = new ArrayCollection();
+        $this->favoriteLanguages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -163,6 +184,90 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __toString()
     {
         return $this->firstname;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): static
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): static
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getUser() === $this) {
+                $comment->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Vote>
+     */
+    public function getVotes(): Collection
+    {
+        return $this->votes;
+    }
+
+    public function addVote(Vote $vote): static
+    {
+        if (!$this->votes->contains($vote)) {
+            $this->votes->add($vote);
+            $vote->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVote(Vote $vote): static
+    {
+        if ($this->votes->removeElement($vote)) {
+            // set the owning side to null (unless already changed)
+            if ($vote->getUser() === $this) {
+                $vote->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Language>
+     */
+    public function getFavoriteLanguages(): Collection
+    {
+        return $this->favoriteLanguages;
+    }
+
+    public function addFavoriteLanguage(Language $favoriteLanguage): static
+    {
+        if (!$this->favoriteLanguages->contains($favoriteLanguage)) {
+            $this->favoriteLanguages->add($favoriteLanguage);
+        }
+
+        return $this;
+    }
+
+    public function removeFavoriteLanguage(Language $favoriteLanguage): static
+    {
+        $this->favoriteLanguages->removeElement($favoriteLanguage);
+
+        return $this;
     }
 
 }

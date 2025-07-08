@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProposedLanguageRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -111,6 +113,17 @@ class ProposedLanguage
     #[ORM\Column(type: 'boolean')]
     private bool $addedToDatabase = false;
 
+    /**
+     * @var Collection<int, Vote>
+     */
+    #[ORM\OneToMany(targetEntity: Vote::class, mappedBy: 'proposedLanguage')]
+    private Collection $votes;
+
+    public function __construct()
+    {
+        $this->votes = new ArrayCollection();
+    }
+
     public function isAddedToDatabase(): bool
     {
         return $this->addedToDatabase;
@@ -119,6 +132,36 @@ class ProposedLanguage
     public function setAddedToDatabase(bool $addedToDatabase): self
     {
         $this->addedToDatabase = $addedToDatabase;
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Vote>
+     */
+    public function getVotes(): Collection
+    {
+        return $this->votes;
+    }
+
+    public function addVote(Vote $vote): static
+    {
+        if (!$this->votes->contains($vote)) {
+            $this->votes->add($vote);
+            $vote->setProposedLanguage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVote(Vote $vote): static
+    {
+        if ($this->votes->removeElement($vote)) {
+            // set the owning side to null (unless already changed)
+            if ($vote->getProposedLanguage() === $this) {
+                $vote->setProposedLanguage(null);
+            }
+        }
+
         return $this;
     }
 }

@@ -18,7 +18,7 @@ class HomeController extends AbstractController
         if ($query) {
             $languages = $languageRepository->searchByNameOrDescription($query);
         } else {
-            $languages = $languageRepository->findRootLanguages(); // modifié ici
+            $languages = $languageRepository->findRootLanguages();
         }
 
         return $this->render('home/index.html.twig', [

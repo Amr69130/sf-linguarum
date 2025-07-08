@@ -35,9 +35,37 @@ class Language
     #[ORM\OneToMany(targetEntity: self::class, mappedBy: 'parent')]
     private Collection $children;
 
+    /**
+     * @var Collection<int, Comment>
+     */
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'language')]
+    private Collection $comments;
+
+    /**
+     * @var Collection<int, Tag>
+     */
+    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'languages')]
+    private Collection $tags;
+
+    /**
+     * @var Collection<int, LanguageResource>
+     */
+    #[ORM\OneToMany(targetEntity: LanguageResource::class, mappedBy: 'language')]
+    private Collection $languageResources;
+
+    /**
+     * @var Collection<int, User>
+     */
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'favoriteLanguages')]
+    private Collection $usersWhoFavorited;
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->tags = new ArrayCollection();
+        $this->languageResources = new ArrayCollection();
+        $this->usersWhoFavorited = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -125,5 +153,116 @@ class Language
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): static
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setLanguage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): static
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getLanguage() === $this) {
+                $comment->setLanguage(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tag>
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    public function addTag(Tag $tag): static
+    {
+        if (!$this->tags->contains($tag)) {
+            $this->tags->add($tag);
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tag $tag): static
+    {
+        $this->tags->removeElement($tag);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, LanguageResource>
+     */
+    public function getLanguageResources(): Collection
+    {
+        return $this->languageResources;
+    }
+
+    public function addLanguageResource(LanguageResource $languageResource): static
+    {
+        if (!$this->languageResources->contains($languageResource)) {
+            $this->languageResources->add($languageResource);
+            $languageResource->setLanguage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLanguageResource(LanguageResource $languageResource): static
+    {
+        if ($this->languageResources->removeElement($languageResource)) {
+            // set the owning side to null (unless already changed)
+            if ($languageResource->getLanguage() === $this) {
+                $languageResource->setLanguage(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsersWhoFavorited(): Collection
+    {
+        return $this->usersWhoFavorited;
+    }
+
+    public function addUsersWhoFavorited(User $usersWhoFavorited): static
+    {
+        if (!$this->usersWhoFavorited->contains($usersWhoFavorited)) {
+            $this->usersWhoFavorited->add($usersWhoFavorited);
+            $usersWhoFavorited->addFavoriteLanguage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUsersWhoFavorited(User $usersWhoFavorited): static
+    {
+        if ($this->usersWhoFavorited->removeElement($usersWhoFavorited)) {
+            $usersWhoFavorited->removeFavoriteLanguage($this);
+        }
+
+        return $this;
     }
 }
